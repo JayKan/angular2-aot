@@ -1,0 +1,70 @@
+{
+  "name": "Angular2-Aot",
+  "version": "0.0.0",
+  "description": "A demo project to illustrate how Angular2 Ahead-of-Time (AoT) Compilation works",
+  "homepage": "https://github.com/JayKan/angular2-aot",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JayKan/angular2-aot.git"
+  },
+  "author": {
+    "name": "Jay Kan",
+    "email": "leicasper@gmail.com"
+  },
+  "scripts": {
+    "clean": "del-cli build dist",
+    "build:dev": "cross-env NODE_ENV=development webpack-dev-server --progress",
+    "build:prod": "cross-env NODE_ENV=production webpack --display-chunks --progress",
+    "server": "cross-env  NODE_ENV=development nodemon -w 'server/**/*.*' ./server/main.js",
+    "production": "npm run clean && npm run build:prod && npm run server",
+    "development": "npm run build:dev",
+    "start": "npm run development"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=5.11",
+    "npm": ">3.x"
+  },
+  "dependencies": {
+    "@angular/common": "2.0.0",
+    "@angular/compiler": "2.0.0",
+    "@angular/compiler-cli": "0.6.2",
+    "@angular/core": "2.0.0",
+    "@angular/forms": "2.0.0",
+    "@angular/http": "2.0.0",
+    "@angular/platform-browser": "2.0.0",
+    "@angular/platform-browser-dynamic": "2.0.0",
+    "@angular/platform-server": "2.0.0",
+    "@angular/router": "3.0.0",
+    "core-js": "^2.4.1",
+    "rxjs": "5.0.0-beta.12",
+    "zone.js": "~0.6.25"
+  },
+  "devDependencies": {
+    "@types/core-js": "^0.9.34",
+    "@types/hammerjs": "^2.0.33",
+    "@types/jasmine": "^2.2.34",
+    "@types/node": "^6.0.40",
+    "@types/source-map": "^0.1.27",
+    "@types/uglify-js": "^2.6.28",
+    "@types/webpack": "^1.12.34",
+    "angular2-template-loader": "^0.5.0",
+    "autoprefixer": "^6.4.1",
+    "awesome-typescript-loader": "^2.2.4",
+    "cross-env": "^2.0.1",
+    "del-cli": "^0.2.0",
+    "express": "^4.14.0",
+    "html-webpack-plugin": "^2.22.0",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.10.2",
+    "npm-run-all": "^3.1.0",
+    "postcss-loader": "^0.13.0",
+    "raw-loader": "^0.5.1",
+    "ts-helpers": "~1.1.1",
+    "typescript": "~2.0.2",
+    "webpack": "2.1.0-beta.25",
+    "webpack-dev-server": "2.1.0-beta.4",
+    "webpack-md5-hash": "~0.0.5",
+    "winston": "^2.2.0"
+  }
+}
