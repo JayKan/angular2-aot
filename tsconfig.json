@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
@@ -19,8 +19,7 @@
       "es6"
     ],
     "types": [
-      "core-js",
-      "hammer-js",
+      "hammerjs",
       "jasmine",
       "node",
       "source-map",
