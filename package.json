@@ -13,12 +13,18 @@
   },
   "scripts": {
     "clean": "del-cli build dist",
-    "build:dev": "cross-env NODE_ENV=development webpack-dev-server --progress",
+    "sass": "node-sass src -o src --output-style compressed",
+    "sass:watch": "node-sass -w src -o src",
+    "build": "run-s build:ngc build:prod",
+    "build:ngc": "ngc",
+    "build:dev": "cross-env NODE_ENV=development webpack-dev-server",
     "build:prod": "cross-env NODE_ENV=production webpack --display-chunks --progress",
+    "prebuild": "npm run clean && npm run sass",
     "server": "cross-env  NODE_ENV=development nodemon -w 'server/**/*.*' ./server/main.js",
-    "production": "npm run clean && npm run build:prod && npm run server",
-    "development": "npm run build:dev",
-    "start": "npm run development"
+    "production": "npm run build && npm run server",
+    "development": "npm-run-all -p -r build:dev sass:watch",
+    "start": "npm run sass && npm run development",
+    "postinstall": "npm run sass"
   },
   "license": "MIT",
   "engines": {
@@ -26,6 +32,14 @@
     "npm": ">3.x"
   },
   "dependencies": {
+    "compression": "^1.6.2",
+    "connect-gzip-static": "^1.0.0",
+    "express": "^4.14.0",
+    "helmet": "^2.2.0",
+    "serve-favicon": "^2.3.0",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
     "@angular/common": "2.0.0",
     "@angular/compiler": "2.0.0",
     "@angular/compiler-cli": "0.6.2",
@@ -37,11 +51,10 @@
     "@angular/platform-server": "2.0.0",
     "@angular/router": "3.0.0",
     "core-js": "^2.4.1",
+    "angularfire2": "2.0.0-beta.5",
+    "firebase": "3.3.0",
     "rxjs": "5.0.0-beta.12",
-    "zone.js": "~0.6.25"
-  },
-  "devDependencies": {
-    "@types/core-js": "^0.9.34",
+    "zone.js": "~0.6.25",
     "@types/hammerjs": "^2.0.33",
     "@types/jasmine": "^2.2.34",
     "@types/node": "^6.0.40",
@@ -51,20 +64,25 @@
     "angular2-template-loader": "^0.5.0",
     "autoprefixer": "^6.4.1",
     "awesome-typescript-loader": "^2.2.4",
+    "compression-webpack-plugin": "^0.3.1",
+    "copy-webpack-plugin": "^3.0.1",
     "cross-env": "^2.0.1",
     "del-cli": "^0.2.0",
-    "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.22.0",
+    "ie-shim": "^0.1.0",
     "morgan": "^1.7.0",
+    "node-sass": "^3.10.0",
     "nodemon": "^1.10.2",
     "npm-run-all": "^3.1.0",
     "postcss-loader": "^0.13.0",
     "raw-loader": "^0.5.1",
+    "source-map-loader": "^0.1.5",
+    "style-loader": "^0.13.1",
     "ts-helpers": "~1.1.1",
     "typescript": "~2.0.2",
     "webpack": "2.1.0-beta.25",
     "webpack-dev-server": "2.1.0-beta.4",
-    "webpack-md5-hash": "~0.0.5",
-    "winston": "^2.2.0"
+    "webpack-md5-hash": "~0.0.5"
   }
 }
