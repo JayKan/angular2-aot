@@ -1,0 +1,56 @@
+sign-in {
+  $root-font-size: 16px !default;
+
+  @function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+  }
+
+  @function rem($value) {
+    $value: strip-unit($value);
+
+    @if $value == 0 {
+      @return $value;
+    }
+
+    @return $value / strip-unit($root-font-size) * 1rem;
+  }
+
+  @mixin button-base {
+    &[disabled] {
+      cursor: default;
+    }
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+  }
+  .sign-in {
+    margin-top: 90px;
+    max-width: 300px;
+  }
+  .sign-in-heading {
+    margin-bottom: 36px;
+    font-size: 30px;
+    font-weight: 300;
+    text-align: center;
+  }
+  .sign-in-button {
+    @include button-base;
+    margin-bottom: 10px;
+    outline: none;
+    border: 1px solid #555;
+    padding: 0;
+    width: 100%;
+    height: 48px;
+    font-family: inherit;
+    font-size: rem(18px);
+    line-height: 48px;
+    color: #999;
+    background: transparent;
+
+    &:hover {
+      border: 2px solid #aaa;
+      line-height: 46px;
+      cursor: pointer;
+    }
+  }
+}
