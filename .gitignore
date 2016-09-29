@@ -6,8 +6,10 @@ build/
 dist/
 tmp/
 **/node_modules/
-/src/app/**/*.css
-
+/src/**/*.css
+.firebaserc
+firebase.json
+firebase.rules.json
 
 #---------------------------------
 # Extensions

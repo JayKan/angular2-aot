@@ -31,10 +31,12 @@
   },
   "exclude": [
     "build",
-    "dist",
+    "public",
     "node_modules",
     "tmp",
-    "src/main.aot.ts"
+    "src/main.aot.ts",
+    "firebase.rules.json",
+    "firebase.json"
   ],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,

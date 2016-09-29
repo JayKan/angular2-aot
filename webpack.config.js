@@ -38,6 +38,10 @@ const rules = {
     test: /\.css$/,
     use: ['raw', 'postcss']
   },
+  json: {
+    test: /\.json$/,
+    use: ['json']
+  },
   html: {
     test: /\.html$/,
     use: ['raw'],
@@ -71,6 +75,7 @@ config.resolve = {
 config.module = {
   rules: [
     rules.css,
+    rules.json,
     rules.html,
     rules.jsSourceMap,
     rules.typescript
@@ -88,12 +93,6 @@ config.plugins = [
     'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
   }),
   new NamedModulesPlugin(),
-  new CopyWebpackPlugin([
-    {
-      from: 'src/app/assets',
-      to: 'assets'
-    }
-  ]),
   new LoaderOptionsPlugin({
     debug: false,
     minimize: ENV_PRODUCTION,
