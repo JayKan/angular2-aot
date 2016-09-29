@@ -9,7 +9,7 @@ const paths = require('./paths');
 module.exports = app => {
   // server address
   app.set('host', process.env.HOST || 'localhost');
-  app.set('port', process.env.PORT || 4000);
+  app.set('port', process.env.PORT || 5000);
 
   // HTTP headers
   app.disable('x-powered-by');

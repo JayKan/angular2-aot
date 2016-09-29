@@ -6,9 +6,6 @@ if (process.env.NODE_ENV === 'production') {
   enableProdMode();
 }
 
-// import common styles
-import './app/assets/styles/styles.css';
-
 // import app module
 import { AppModule } from './app';
 
