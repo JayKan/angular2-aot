@@ -1,0 +1,119 @@
+$root-font-size: 16px !default;
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+@function em($value, $base: $root-font-size) {
+  $value: strip-unit($value);
+
+  @if $value == 0 {
+    @return $value;
+  }
+
+  @return $value / strip-unit($base) * 1em;
+}
+@function rem($value) {
+  $value: strip-unit($value);
+
+  @if $value == 0 {
+    @return $value;
+  }
+
+  @return $value / strip-unit($root-font-size) * 1rem;
+}
+$breakpoints: (
+        small  : 0,
+        medium : 740px,
+        large  : 980px,
+        xlarge : 1300px
+) !default;
+$breakpoint-prefixes: (
+        small  : sm-,
+        medium : md-,
+        large  : lg-,
+        xlarge : xl-
+) !default;
+
+@function media-query-width($value) {
+  @if map-has-key($breakpoints, $value) {
+    $value: map-get($breakpoints, $value);
+  }
+
+  @if $value == 0 {
+    @return $value;
+  }
+  @return em($value);
+}
+@mixin media-query($min: null, $max: null, $orientation: null, $pixel-ratio: null, $type: 'screen') {
+  $query: $type;
+
+  @if $pixel-ratio {
+    $query: $query + ' and (min-resolution: #{$pixel-ratio * 1dppx})';
+  }
+
+  @if $min {
+    $min-width: media-query-width($min);
+    @if $min-width > 0 {
+      $query: $query + ' and (min-width: #{$min-width})';
+    }
+  }
+
+  @if $max {
+    $max-width: media-query-width($max) - .01em;
+    $query: $query + ' and (max-width: #{$max-width})';
+  }
+
+  @if $orientation {
+    $query: $query + ' and (orientation: #{$orientation})';
+  }
+
+  @media #{$query} {
+    @content;
+  }
+}
+
+.task-form {
+  margin: 40px 0 10px;
+
+  @include media-query(540) {
+    margin: 80px 0 20px;
+  }
+}
+
+.task-form-input {
+  outline: none;
+  border: 0;
+  border-bottom: 1px dotted #666;
+  border-radius: 0;
+  padding: 0 0 5px 0;
+  width: 100%;
+  height: 50px;
+  font-family: inherit;
+  font-size: rem(24px);
+  font-weight: 300;
+  color: #fff;
+  background: transparent;
+
+  @include media-query(540) {
+    height: 61px;
+    font-size: rem(32px);
+  }
+
+  &::placeholder {
+    color: #999;
+    opacity: 1; // firefox native placeholder style has opacity < 1
+  }
+
+  &:focus::placeholder {
+    color: #777;
+    opacity: 1;
+  }
+
+  // webkit input doesn't inherit font-smoothing from ancestors
+  -webkit-font-smoothing: antialiased;
+
+  // remove `x`
+  &::-ms-clear {
+    display: none;
+  }
+}
